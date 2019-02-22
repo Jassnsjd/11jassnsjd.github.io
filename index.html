@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script src="./JS/loadImg.js"></script>
+<script src="./JS/sky.js"></script>
+<script src="./JS/bird.js"></script>
+<script src="./JS/land.js"></script>
+<script src="./JS/GD.js"></script>
+<script src="./JS/END.js"></script>
+<script src="./JS/gameStart.js"></script>
+<body>
+<canvas id="cvs" width="500" height="500"></canvas>
+<script>
+    var cvs = document.getElementById("cvs");
+    var ctx = cvs.getContext("2d");
+//    function extend(obj1,obj2){
+//        for(var k in obj2){
+//            if(obj2.hasOwnProperty(k)){
+//                obj1[k]=obj2[k];
+//            }
+//        }
+//    }
+    loadImg({
+        bird: './img/bird.png',
+        land: './img/land.png',
+        pipeDown: './img/pipeDown.png',
+        pipeUp: './img/pipeUp.png',
+        sky: './img/sky.png'
+    }, function( imgObj ) {
+        cvs.width = imgObj.sky.width;
+        cvs.height = imgObj.sky.height;
+
+        var flag = true;
+        var start = gameStart( ctx, imgObj );
+        var over = ENDing( ctx );
+
+        start.addListenner( function() {
+            flag = false;
+            over.draw();
+        } );
+
+        (function run() {
+            start.draw();
+            if ( flag ) {
+                requestAnimationFrame( run );
+            }
+        }());
+    });
+</script>
+</body>
+</html>
