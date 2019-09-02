@@ -8,7 +8,7 @@
         this.speed = speed;
         this.width = this.imgDown.width;
         this.height = this.imgDown.height;
-        this.x =300+this.width*3*(GD.len-1);
+        this.x =600+this.width*3*(GD.len-1);
         this.minHeight = 100;
         this.y = 0;
         GD.len++;
